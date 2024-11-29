@@ -1,1 +1,1 @@
-# DenoFullStackTemplate
+# NodeFullStackTemplate
