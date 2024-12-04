@@ -3,7 +3,7 @@ import type { ProjectConfig } from "@/types/ProjectConfig";
 import fs from "fs";
 
 const defaultConfig: ProjectConfig = {
-    PROJECT_NAME: "NodeFullStackTemplate",
+    PROJECT_NAME: "Node Full Stack Template",
     PROJECT_DESCRIPTION: "MeAwesome's Node Full Stack Template",
     PROJECT_VERSION: "1.0.0",
     PROJECT_AUTHOR: "Isaac Robbins (MeAwesome) <isaacprobbins@gmail.com>",

@@ -1,6 +1,6 @@
 import config from "@config";
 import logger from "@logger";
-// import Server from "./core/Server.ts";
+import Server from "@/core/Server";
 
 // Created with: https://patorjk.com/software/taag/
 const LogLogo = `
@@ -22,6 +22,6 @@ Version: ${config.PROJECT_VERSION}
 Repository: ${config.PROJECT_REPOSITORY}
 `);
 
-// const server = new Server();
+const server = new Server();
 
-// server.start();
+server.start();

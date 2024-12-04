@@ -31,7 +31,7 @@ const fileFormat = winston.format.printf(({ level, message, timestamp }) => {
     return `[TIME:${timestamp}] [LEVEL:${level}]: ${message}`;
 });
 
-const LEVEL: string = process.env.LOG_LEVEL ?? "info";
+const LEVEL: string = process.env.LOG_LEVEL ?? "silly";
 
 const logger = winston.createLogger({
     transports: [
