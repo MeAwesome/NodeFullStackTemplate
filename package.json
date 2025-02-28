@@ -12,7 +12,7 @@
 		"start": "cross-env NODE_ENV=production node ./dist/core/index.js",
 		"dev": "cross-env NODE_ENV=development tsx ./src/core/index.ts",
 		"build": "node ./scripts/build.js",
-		"prettier": "prettier --check .",
+		"prettier": "prettier . --check --write",
 		"lint": "eslint . --fix",
 		"storybook": "storybook dev -p 6006"
 	},
