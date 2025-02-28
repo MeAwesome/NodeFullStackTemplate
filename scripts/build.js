@@ -112,7 +112,7 @@ async function buildBackend() {
 	spin("Formatting code...");
 
 	try {
-		await execAsync("prettier --write ./src");
+		await execAsync("prettier ./src --check --write");
 		success("Code formatted successfully.");
 	} catch (e) {
 		error(`Code formatting failed. \n\n${e.stdout}`);
@@ -281,7 +281,7 @@ async function buildFrontend() {
 	spin("Formatting code...");
 
 	try {
-		await execAsync("prettier --write ./app");
+		await execAsync("prettier ./app --check --write");
 		success("Code formatted successfully.");
 	} catch (e) {
 		error(`Code formatting failed. \n\n${e.stdout}`);
