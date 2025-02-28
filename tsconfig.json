@@ -1,32 +1,38 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "dist",
-        "strict": true,
-        "declaration": false,
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "baseUrl": "src",
-        "paths": {
-            "@/*": ["./*"],
-            "@config": ["./util/config"],
-            "@logger": ["./util/logger"]
-        },
-        "allowJs": true,
-        "skipLibCheck": true,
-        "noEmit": false,
-        "incremental": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "jsx": "preserve",
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ]
-    },
-    "include": ["src/**/*.ts", ".next/types/**/*.ts"],
-    "exclude": ["node_modules"]
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"**/.server/**/*.ts",
+		"**/.server/**/*.tsx",
+		"**/.client/**/*.ts",
+		"**/.client/**/*.tsx",
+		"vite.config.ts",
+		".storybook/sb-vite.config.ts"
+	],
+	"exclude": ["node_modules"],
+	"compilerOptions": {
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"types": ["@remix-run/node", "vite/client"],
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"jsx": "react-jsx",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"target": "ESNext",
+		"strict": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "src",
+		"paths": {
+			"@root/*": ["../*"],
+			"~/*": ["../app/*"],
+			"@/*": ["./*"],
+			"@config": ["./core/util/config"],
+			"@logger": ["./core/util/logger"]
+		},
+		"noEmit": false,
+		"outDir": "dist"
+	}
 }

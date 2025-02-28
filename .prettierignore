@@ -1,13 +1,10 @@
-# Ignore artifacts:
-.next
-app
-data
+build
 dist
 node_modules
+.env
 .gitignore
 .prettierignore
 .prettierrc
 LICENSE
-next-env.d.ts
 README.md
 yarn.lock
