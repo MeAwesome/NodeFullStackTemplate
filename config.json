@@ -1,0 +1,15 @@
+{
+	"services": {
+		"core": {
+			"http": {
+				"port": 4444
+			},
+			"websocket": false
+		},
+		"project": {
+			"discord": {
+				"token": "env.DISCORD_TOKEN"
+			}
+		}
+	}
+}
