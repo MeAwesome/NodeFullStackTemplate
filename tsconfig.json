@@ -24,6 +24,7 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
+		"allowImportingTsExtensions": true,
 		"baseUrl": "src",
 		"paths": {
 			"@root/*": ["../*"],
@@ -32,7 +33,7 @@
 			"@config": ["./core/util/config"],
 			"@logger": ["./core/util/logger"]
 		},
-		"noEmit": false,
+		"noEmit": true,
 		"outDir": "dist"
 	}
 }

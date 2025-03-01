@@ -7,11 +7,8 @@ const defaultConfig = {
 			http: {
 				port: 3000
 			},
-			websocket: true
-		},
-		project: {
-			discord: {
-				token: "default-token"
+			websocket: {
+				enabled: true
 			}
 		}
 	}

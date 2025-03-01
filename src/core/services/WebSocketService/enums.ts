@@ -1,3 +1,4 @@
 export const SocketEvent = {
-	CONNECTION: "connection"
+	CONNECTION: "connection",
+	DISCONNECTION: "disconnection"
 } as const;

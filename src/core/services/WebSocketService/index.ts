@@ -21,6 +21,7 @@ export class WebSocketService extends Service {
 		await HTTPService.waitForActivation();
 		this.socketServer = new Server(HTTPService.getServer().server);
 		this.socketServer.on("connection", this.onConnection.bind(this));
+		this.socketServer.on("disconnect", this.onDisconnection.bind(this));
 		logger.info("WebSocket service started");
 	}
 
@@ -31,7 +32,19 @@ export class WebSocketService extends Service {
 
 	private onConnection(socket: Socket): void {
 		logger.debug("New WebSocket connection");
+		socket.on("disconnect", () => {
+			this.onDisconnection(socket);
+		});
 		this.emit(SocketEvent.CONNECTION, socket);
+
+		socket.on("test", (data) => {
+			logger.debug(`Test event received: ${data}`);
+		});
+	}
+
+	private onDisconnection(socket: Socket): void {
+		logger.debug("WebSocket disconnected");
+		this.emit(SocketEvent.DISCONNECTION, socket);
 	}
 }
 

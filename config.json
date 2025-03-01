@@ -4,7 +4,9 @@
 			"http": {
 				"port": 4444
 			},
-			"websocket": false
+			"websocket": {
+				"enabled": true
+			}
 		},
 		"project": {
 			"discord": {
