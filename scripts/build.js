@@ -314,6 +314,13 @@ async function buildDocker() {
 	const PORT = configJSON.services.core.http.port;
 	const envFile = path.join(process.cwd(), ".env");
 
+	try {
+		await execAsync("docker version");
+	} catch (e) {
+		error(`Docker is not running or installed. \n\n${e}`);
+		exit(1);
+	}
+
 	const { shouldRemoveContainer } = await prompts({
 		type: "confirm",
 		name: "shouldRemoveContainer",
