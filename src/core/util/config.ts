@@ -1,5 +1,6 @@
 import "dotenv/config";
 import projectConfig from "@root/config.json" with { type: "json" };
+import { Config } from "tailwind-merge";
 
 const defaultConfig = {
 	services: {
@@ -12,30 +13,31 @@ const defaultConfig = {
 			}
 		}
 	}
-} as const;
+};
+
+type DefaultConfigType = typeof defaultConfig;
+type ProjectConfigType = typeof projectConfig;
+type ConfigType = DefaultConfigType & ProjectConfigType;
+type EitherConfigType = DefaultConfigType | ProjectConfigType;
 
 function replaceEnvVariables(value: string): string {
 	return value.replaceAll(/env\.(\w+)/g, (_, key) => process.env[key] ?? "");
 }
 
-type ConfigType = {
-	[key: string]: string | number | boolean | ConfigType;
-};
-
-function replaceEnvVariablesInObject(obj: ConfigType): ConfigType {
+function replaceEnvVariablesInObject(obj: EitherConfigType): EitherConfigType {
 	for (const key in obj) {
-		if (typeof obj[key] === "string") {
-			obj[key] = replaceEnvVariables(obj[key]);
-		} else if (typeof obj[key] === "object" && obj[key] !== null) {
-			replaceEnvVariablesInObject(obj[key]);
+		const value = obj[key as keyof EitherConfigType];
+		if (typeof value === "string") {
+			console.log(key, value);
+			// @ts-expect-error - This is a hack to make TypeScript happy
+			obj[key] = replaceEnvVariables(value);
+		} else if (typeof value === "object" && value !== null) {
+			replaceEnvVariablesInObject(value as unknown as EitherConfigType);
 		}
 	}
 	return obj;
 }
 
-type ProjectConfigType = typeof projectConfig;
-
-// replace default config with project config
-const config: ProjectConfigType = { ...defaultConfig, ...replaceEnvVariablesInObject(projectConfig) } as const;
+const config: ProjectConfigType = { ...replaceEnvVariablesInObject(defaultConfig), ...replaceEnvVariablesInObject(projectConfig) } as ProjectConfigType;
 
 export default config;
