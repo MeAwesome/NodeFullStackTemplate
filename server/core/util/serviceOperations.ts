@@ -12,8 +12,6 @@ export async function activateServices(): Promise<void> {
 
 	const coreServices = [];
 
-	console.log(coreServicesDir);
-
 	for (const serviceFolder of fs.readdirSync(coreServicesDir)) {
 		const service = (await import(`../../core/services/${serviceFolder}/index${fileExtension}`)).default;
 		coreServices.push(service.activate());

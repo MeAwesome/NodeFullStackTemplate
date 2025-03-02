@@ -3138,16 +3138,6 @@
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.6.1.tgz#13e09a32d7a8b7060fe38304788ebf4197cd2149"
   integrity sha512-vq7fv0rnt+QTXgPxr5Hjc210p6YKq2kmdziLgnsZGgLJ9e6VAShx1pACLuRjd/AS/sr7phAR58OIIpf0LlmQNw==
 
-"@trpc/client@^11.0.0-rc.814":
-  version "11.0.0-rc.814"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-rc.814.tgz#f56aa7f47d362967f832b09e86463154102d9e43"
-  integrity sha512-X++trN7KifRvLWXVmDFSSaCS8wHCdfUrttU/8jJlkWCAYvjsjFHX2IsyBUCRS+FVwat9GMRcut0Bg3itmoIIHQ==
-
-"@trpc/server@^11.0.0-rc.814":
-  version "11.0.0-rc.814"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-rc.814.tgz#010d716a10be70445646e4b525ee41fd9ac1e96c"
-  integrity sha512-tbYYpJIjYa6YVzujuPmTczIdmGH8XZwGmncO4uNa+CP/u/EECbtykkyGHx+tSi9ZjSK6fRcIvm9AGiUWzF7cmw==
-
 "@types/acorn@^4.0.0":
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@types/acorn/-/acorn-4.0.6.tgz#d61ca5480300ac41a7d973dd5b84d0a591154a22"

@@ -112,7 +112,7 @@ async function buildBackend() {
 	spin("Formatting code...");
 
 	try {
-		await execAsync("prettier ./src --check --write");
+		await execAsync("prettier ./server --check --write");
 		success("Code formatted successfully.");
 	} catch (e) {
 		error(`Code formatting failed. \n\n${e.stdout}`);
@@ -122,7 +122,7 @@ async function buildBackend() {
 	spin("Linting code...");
 
 	try {
-		await execAsync("eslint ./src --fix");
+		await execAsync("eslint ./server --fix");
 		success("Code linted successfully.");
 	} catch (e) {
 		error(`Code linting failed. \n\n${e.stdout}`);
@@ -160,22 +160,22 @@ async function buildBackend() {
 		success("No JSON files to remove from dist directory.");
 	}
 
-	spin("Moving files from dist/src to dist...");
-	const srcDir = path.join(distDir, "src");
+	spin("Moving files from dist/server to dist...");
+	const serverDir = path.join(distDir, "server");
 
 	try {
-		fs.readdirSync(srcDir).forEach((file) => {
-			const srcPath = path.join(srcDir, file);
+		fs.readdirSync(serverDir).forEach((file) => {
+			const serverPath = path.join(serverDir, file);
 			const destPath = path.join(distDir, file);
-			fs.renameSync(srcPath, destPath);
+			fs.renameSync(serverPath, destPath);
 		});
-		fs.rmdirSync(srcDir);
+		fs.rmdirSync(serverDir);
 	} catch (e) {
-		error(`Failed to move files from dist/src to dist. \n\n${e}`);
+		error(`Failed to move files from dist/server to dist. \n\n${e}`);
 		exit(1);
 	}
 
-	success("Files moved from dist/src to dist successfully.");
+	success("Files moved from dist/server to dist successfully.");
 
 	spin("Resolving module imports...");
 

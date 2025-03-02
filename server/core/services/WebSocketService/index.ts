@@ -1,11 +1,11 @@
-import logger from "@logger";
-import Service from "@/core/Service";
+import logger from "@root/server/core/util/logger";
+import Service from "@root/server/core/Service";
 
-import { SocketEvent } from "@/core/services/WebSocketService/enums";
+import { SocketEvent } from "@root/server/core/services/WebSocketService/enums";
 
 import { Server, Socket } from "socket.io";
 
-import HTTPService from "@/core/services/HTTPService";
+import HTTPService from "@root/server/core/services/HTTPService";
 
 export class WebSocketService extends Service {
 	private socketServer: Server;

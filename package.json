@@ -10,7 +10,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"start": "cross-env NODE_ENV=production node ./dist/core/index.js",
-		"dev": "cross-env NODE_ENV=development tsx ./src/core/index.ts",
+		"dev": "cross-env NODE_ENV=development tsx ./server/core/index.ts",
 		"build": "node ./scripts/build.js",
 		"prettier": "prettier . --check --write",
 		"lint": "eslint . --fix",
@@ -50,8 +50,6 @@
 		"@remix-run/node": "^2.15.3",
 		"@remix-run/react": "^2.15.3",
 		"@tailwindcss/vite": "^4.0.9",
-		"@trpc/client": "^11.0.0-rc.814",
-		"@trpc/server": "^11.0.0-rc.814",
 		"chalk": "^5.4.1",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",

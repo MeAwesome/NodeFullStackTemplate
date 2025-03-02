@@ -1,7 +1,7 @@
 import { Links, Meta, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import globalStylesheet from "~/public/global.css?url";
 import { SocketProvider } from "~/providers/socket-provider";
-import config from "@config";
+import config from "@root/server/core/util/config";
 
 export function meta() {
 	return [
