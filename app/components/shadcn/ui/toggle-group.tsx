@@ -2,8 +2,8 @@ import * as React from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { type VariantProps } from "class-variance-authority";
 
-import { cn } from "@root/app/lib/shadcn/utils";
-import { toggleVariants } from "@root/app/components/shadcn/ui/toggle";
+import { cn } from "~/lib/shadcn/utils";
+import { toggleVariants } from "~/components/shadcn/ui/toggle";
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({
 	size: "default",

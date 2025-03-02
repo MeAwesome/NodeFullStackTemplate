@@ -1,7 +1,7 @@
 import { Links, Meta, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import globalStylesheet from "~/public/global.css?url";
-import { SocketProvider } from "./providers/SocketProvider";
-import configJSON from "@root/config.json";
+import { SocketProvider } from "~/providers/socket-provider";
+import config from "@config";
 
 export function meta() {
 	return [
@@ -20,8 +20,8 @@ export function links() {
 
 export function loader() {
 	return {
-		websocketConfig: configJSON.services.core.websocket
-	}
+		websocketConfig: config.services.core.websocket
+	};
 }
 
 export default function Root() {

@@ -26,7 +26,7 @@ export class WebSocketService extends Service {
 	}
 
 	public async stop(): Promise<void> {
-		this.socketServer.close();
+		await this.socketServer.close();
 		logger.info("WebSocket service stopped");
 	}
 
@@ -36,10 +36,6 @@ export class WebSocketService extends Service {
 			this.onDisconnection(socket);
 		});
 		this.emit(SocketEvent.CONNECTION, socket);
-
-		socket.on("test", (data) => {
-			logger.debug(`Test event received: ${data}`);
-		});
 	}
 
 	private onDisconnection(socket: Socket): void {
