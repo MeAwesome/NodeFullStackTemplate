@@ -4,7 +4,13 @@
 			"http": {
 				"port": 4444
 			},
-			"websocket": false
+			"websocket": {
+				"enabled": true,
+				"latencyCheck": {
+					"enabled": true,
+					"interval": 1000
+				}
+			}
 		},
 		"project": {
 			"discord": {

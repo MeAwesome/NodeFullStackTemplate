@@ -3,14 +3,14 @@ import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 
-import { useIsMobile } from "@root/app/hooks/shadcn/use-mobile";
-import { cn } from "@root/app/lib/shadcn/utils";
-import { Button } from "@root/app/components/shadcn/ui/button";
-import { Input } from "@root/app/components/shadcn/ui/input";
-import { Separator } from "@root/app/components/shadcn/ui/separator";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@root/app/components/shadcn/ui/sheet";
-import { Skeleton } from "@root/app/components/shadcn/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@root/app/components/shadcn/ui/tooltip";
+import { useIsMobile } from "~/hooks/shadcn/use-mobile";
+import { cn } from "~/lib/shadcn/utils";
+import { Button } from "~/components/shadcn/ui/button";
+import { Input } from "~/components/shadcn/ui/input";
+import { Separator } from "~/components/shadcn/ui/separator";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "~/components/shadcn/ui/sheet";
+import { Skeleton } from "~/components/shadcn/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/shadcn/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
