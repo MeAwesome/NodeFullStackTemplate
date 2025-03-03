@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect } from "react";
-import { SocketContext } from "~/providers/socket-provider";
+import { SocketContext, SocketLatencyContext } from "~/providers/socket-provider";
 
 export function useSocket() {
 	const socket = useContext(SocketContext);
+	const latency = useContext(SocketLatencyContext);
 	if (!socket) {
 		throw new Error("useSocket must be used within a SocketProvider");
 	}
@@ -21,6 +22,7 @@ export function useSocket() {
 		},
 		off: (event: string) => {
 			socket.off(event);
-		}
+		},
+		latency: latency
 	};
 }

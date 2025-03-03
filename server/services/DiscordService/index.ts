@@ -1,6 +1,6 @@
-import config from "@root/server/core/util/config";
-import logger from "@root/server/core/util/logger";
-import Service from "@root/server/core/Service";
+import config from "@config";
+import logger from "@logger";
+import Service from "@/core/Service";
 
 import { Client, GatewayIntentBits, Partials, REST, User } from "discord.js";
 

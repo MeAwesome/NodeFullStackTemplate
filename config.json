@@ -5,7 +5,11 @@
 				"port": 4444
 			},
 			"websocket": {
-				"enabled": true
+				"enabled": true,
+				"latencyCheck": {
+					"enabled": true,
+					"interval": 1000
+				}
 			}
 		},
 		"project": {

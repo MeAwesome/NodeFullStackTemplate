@@ -4,11 +4,7 @@ import { SocketProvider } from "~/providers/socket-provider";
 import config from "@root/server/core/util/config";
 
 export function meta() {
-	return [
-		{ title: "Node FullStack Template" },
-		{ charSet: "utf-8" },
-		{ name: "viewport", content: "width=device-width, initial-scale=1" }
-	];
+	return [{ title: "Node FullStack Template" }];
 }
 
 export function links() {
@@ -29,11 +25,13 @@ export default function Root() {
 	return (
 		<html lang="en">
 			<head>
+				<meta charSet="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<Meta />
 				<Links />
 			</head>
 			<body>
-				<SocketProvider enabled={websocketConfig.enabled}>
+				<SocketProvider config={websocketConfig}>
 					<Outlet />
 				</SocketProvider>
 				<Scripts />

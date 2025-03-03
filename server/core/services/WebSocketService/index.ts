@@ -1,11 +1,12 @@
-import logger from "@root/server/core/util/logger";
-import Service from "@root/server/core/Service";
+import logger from "@logger";
+import config from "@config";
+import Service from "@/core/Service";
 
-import { SocketEvent } from "@root/server/core/services/WebSocketService/enums";
-
+import fs from "node:fs";
+import path from "node:path";
 import { Server, Socket } from "socket.io";
 
-import HTTPService from "@root/server/core/services/HTTPService";
+import HTTPService from "@/core/services/HTTPService";
 
 export class WebSocketService extends Service {
 	private socketServer: Server;
@@ -20,8 +21,7 @@ export class WebSocketService extends Service {
 		logger.info("Waiting for HTTP service to start...");
 		await HTTPService.waitForActivation();
 		this.socketServer = new Server(HTTPService.getServer().server);
-		this.socketServer.on("connection", this.onConnection.bind(this));
-		this.socketServer.on("disconnect", this.onDisconnection.bind(this));
+		await this.registerRoutes();
 		logger.info("WebSocket service started");
 	}
 
@@ -30,17 +30,49 @@ export class WebSocketService extends Service {
 		logger.info("WebSocket service stopped");
 	}
 
-	private onConnection(socket: Socket): void {
-		logger.debug("New WebSocket connection");
-		socket.on("disconnect", () => {
-			this.onDisconnection(socket);
+	private async registerRoutes(): Promise<void> {
+		const eventsDir = path.resolve(import.meta.dirname, "../../../routes/websocket");
+		const eventsRoutes = fs
+			.readdirSync(eventsDir, {
+				recursive: true,
+				withFileTypes: true
+			})
+			.filter((dirent) => dirent.isFile())
+			.sort((a, b) => {
+				const aDepth = a.parentPath.split(path.sep).length;
+				const bDepth = b.parentPath.split(path.sep).length;
+				if (aDepth == bDepth) {
+					return b.name.localeCompare(a.name);
+				}
+				return aDepth - bDepth;
+			})
+			.map((route) => path.join(route.parentPath, route.name));
+		this.socketServer.on("connection", async (socket: Socket) => {
+			if (config.services.core.websocket.latencyCheck.enabled) {
+				socket.on("WebSocketService/latencyCheck", (startDate: number) => {
+					socket.emit("WebSocketService/latencyCheck", startDate);
+				});
+			}
+			for (const route of eventsRoutes) {
+				const routePath = path.relative(eventsDir, route).replaceAll(path.sep, "/");
+				const routeEventPath = routePath.split(".")[0];
+				const routeImportPath = path.join("../../../routes/websocket", routePath).replaceAll(path.sep, "/");
+				const routeModule = (await import(routeImportPath)).default;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				socket.on(routeEventPath, (args: any[]) => {
+					try {
+						routeModule(socket, ...args);
+					} catch (error) {
+						logger.error(`Error in WebSocket route ${routeEventPath}: ${error}`);
+					}
+				});
+				logger.verbose(`WebSocket route registered: ${routeEventPath}`);
+				if (routeEventPath === "connect") {
+					routeModule(socket);
+				}
+			}
 		});
-		this.emit(SocketEvent.CONNECTION, socket);
-	}
-
-	private onDisconnection(socket: Socket): void {
-		logger.debug("WebSocket disconnected");
-		this.emit(SocketEvent.DISCONNECTION, socket);
+		logger.info("WebSocket routes registered");
 	}
 }
 
