@@ -22,9 +22,7 @@ export class HTTPService extends Service {
 		this.fastifyServer = await fastify({
 			ignoreTrailingSlash: true
 		});
-		await this.fastifyServer.register(remixFastify, {
-			buildDirectory: "build/remix"
-		});
+		await this.fastifyServer.register(remixFastify);
 		await this.registerRoutes();
 		await this.fastifyServer.listen({
 			port: config.services.core.http.port,

@@ -3,3 +3,4 @@ dist
 node_modules
 *storybook.log
 .env
+public/entry.worker.js

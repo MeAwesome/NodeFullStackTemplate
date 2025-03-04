@@ -322,11 +322,11 @@ async function buildDocker() {
 	}
 
 	const { imageNamespace } = await prompts({
-			type: "text",
-			name: "imageNamespace",
-			message: "Enter the Docker Hub namespace (username or organization):",
-			initial: "meawesome"
-		});
+		type: "text",
+		name: "imageNamespace",
+		message: "Enter the Docker Hub namespace (username or organization):",
+		initial: "meawesome"
+	});
 
 	const { shouldRemoveContainer } = await prompts({
 		type: "confirm",

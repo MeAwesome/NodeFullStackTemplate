@@ -1,14 +1,19 @@
 import "dotenv/config";
-import projectConfig from "@root/config.json" with { type: "json" };
+import projectConfig from "../../../config.json" with { type: "json" };
 
 const defaultConfig = {
+	enablePWA: true,
 	services: {
 		core: {
 			http: {
 				port: 3000
 			},
 			websocket: {
-				enabled: true
+				enabled: true,
+				latencyCheck: {
+					enabled: true,
+					interval: 1000
+				}
 			}
 		}
 	}

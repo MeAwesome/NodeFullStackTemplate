@@ -1,4 +1,5 @@
 {
+	"enablePWA": true,
 	"services": {
 		"core": {
 			"http": {
