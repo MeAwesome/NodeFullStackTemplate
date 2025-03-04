@@ -29,16 +29,15 @@ export class HTTPService extends Service {
 			port: config.services.core.http.port,
 			host: "0.0.0.0"
 		});
-		logger.info("HTTP service started");
+		logger.verbose("HTTP service started");
 	}
 
 	public async stop(): Promise<void> {
-		logger.info("Waiting for WebSocket service to stop...");
+		logger.verbose("Waiting for WebSocket service to stop...");
 		await WebSocketService.waitForDeactivation();
-		logger.info("Noticed WebSocket service stopped");
-		logger.info("Stopping HTTP service...");
+		logger.verbose("Stopping HTTP service...");
 		await this.fastifyServer.close();
-		logger.info("HTTP service stopped");
+		logger.verbose("HTTP service stopped");
 	}
 
 	private async registerRoutes(): Promise<void> {
