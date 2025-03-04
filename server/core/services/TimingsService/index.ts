@@ -10,11 +10,11 @@ export class TimingsService extends Service {
 	}
 
 	public async start(): Promise<void> {
-		logger.debug("Timings service started");
+		logger.verbose("Timings service started");
 	}
 	public async stop(): Promise<void> {
 		this.clearAllTimings();
-		logger.debug("Timings service stopped");
+		logger.verbose("Timings service stopped");
 	}
 
 	public setTimeout(key: string, callback: () => void, delay: number): void {

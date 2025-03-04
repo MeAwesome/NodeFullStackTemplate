@@ -30,7 +30,7 @@ export async function activateServices(): Promise<void> {
 
 	await Promise.all(projectServices);
 
-	logger.debug("Activated all services");
+	logger.info("Activated all services");
 }
 
 export async function deactivateServices(): Promise<void> {
@@ -56,5 +56,5 @@ export async function deactivateServices(): Promise<void> {
 
 	await Promise.all(coreServices);
 
-	logger.debug("Deactivated all services");
+	logger.info("Deactivated all services");
 }

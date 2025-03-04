@@ -18,16 +18,16 @@ export class WebSocketService extends Service {
 	}
 
 	public async start(): Promise<void> {
-		logger.info("Waiting for HTTP service to start...");
+		logger.verbose("Waiting for HTTP service to start...");
 		await HTTPService.waitForActivation();
 		this.socketServer = new Server(HTTPService.getServer().server);
 		await this.registerRoutes();
-		logger.info("WebSocket service started");
+		logger.verbose("WebSocket service started");
 	}
 
 	public async stop(): Promise<void> {
 		await this.socketServer.close();
-		logger.info("WebSocket service stopped");
+		logger.verbose("WebSocket service stopped");
 	}
 
 	private async registerRoutes(): Promise<void> {
@@ -72,7 +72,7 @@ export class WebSocketService extends Service {
 				}
 			}
 		});
-		logger.info("WebSocket routes registered");
+		logger.debug("WebSocket routes registered");
 	}
 }
 

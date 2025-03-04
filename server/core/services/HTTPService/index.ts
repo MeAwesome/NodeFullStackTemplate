@@ -20,7 +20,8 @@ export class HTTPService extends Service {
 
 	public async start(): Promise<void> {
 		this.fastifyServer = await fastify({
-			ignoreTrailingSlash: true
+			ignoreTrailingSlash: true,
+			forceCloseConnections: true
 		});
 		await this.fastifyServer.register(remixFastify);
 		await this.registerRoutes();

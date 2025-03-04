@@ -18,6 +18,7 @@ async function main() {
 async function quit() {
 	logger.info("Stopping...");
 	await deactivateServices();
+	logger.info("Successfully shut down. Exiting...");
 	process.exit(0);
 }
 
