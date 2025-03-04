@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../components/shadcn/ui/button";
-import { useSocket } from "../hooks/use-socket";
+import { Button } from "~/components/shadcn/ui/button";
+import { useSocket } from "~/hooks/use-socket";
 
 export function meta() {
 	return [{ title: "Home" }];

@@ -47,6 +47,8 @@
 		"@radix-ui/react-toggle": "^1.1.2",
 		"@radix-ui/react-toggle-group": "^1.1.2",
 		"@radix-ui/react-tooltip": "^1.1.8",
+		"@remix-pwa/sw": "^3.0.10",
+		"@remix-pwa/worker-runtime": "^2.1.4",
 		"@remix-run/node": "^2.15.3",
 		"@remix-run/react": "^2.15.3",
 		"@tailwindcss/vite": "^4.0.9",
@@ -86,6 +88,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.21.0",
+		"@remix-pwa/dev": "^3.1.0",
 		"@remix-run/dev": "^2.15.3",
 		"@storybook/addon-a11y": "^8.6.2",
 		"@storybook/addon-essentials": "^8.6.2",

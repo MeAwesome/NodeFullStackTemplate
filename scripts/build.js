@@ -321,6 +321,13 @@ async function buildDocker() {
 		exit(1);
 	}
 
+	const { imageNamespace } = await prompts({
+			type: "text",
+			name: "imageNamespace",
+			message: "Enter the Docker Hub namespace (username or organization):",
+			initial: "meawesome"
+		});
+
 	const { shouldRemoveContainer } = await prompts({
 		type: "confirm",
 		name: "shouldRemoveContainer",
@@ -371,7 +378,7 @@ async function buildDocker() {
 		try {
 			const { stdout } = await execAsync(`docker images --format "{{.Repository}}"`);
 			if (stdout.trim().indexOf(packageJSON.name) !== -1) {
-				await execAsync(`docker rmi ${packageJSON.name}`);
+				await execAsync(`docker rmi ${imageNamespace}/${packageJSON.name}`);
 			}
 			success("Old Docker image removed.");
 		} catch (e) {
@@ -396,7 +403,7 @@ async function buildDocker() {
 
 	try {
 		await execAsync(
-			`docker build -t ${packageJSON.name} --build-arg NODE_VERSION=${NODE_VERSION} --build-arg PORT=${PORT} .`
+			`docker build -t ${imageNamespace}/${packageJSON.name} --build-arg NODE_VERSION=${NODE_VERSION} --build-arg PORT=${PORT} .`
 		);
 		success("Docker image built successfully.");
 	} catch (e) {
@@ -416,11 +423,30 @@ async function buildDocker() {
 
 		try {
 			await execAsync(
-				`docker run -d --env-file ${envFile} -p ${PORT}:${PORT} --name ${packageJSON.name} ${packageJSON.name}`
+				`docker run -d --env-file ${envFile} -p ${PORT}:${PORT} --name ${packageJSON.name} ${imageNamespace}/${packageJSON.name}`
 			);
 			success("Docker container running successfully.");
 		} catch (e) {
 			error(`Failed to run Docker container. \n\n${e}`);
+			exit(1);
+		}
+	}
+
+	const { shouldPushImage } = await prompts({
+		type: "confirm",
+		name: "shouldPushImage",
+		message: "Push Docker image to Docker Hub?",
+		initial: true
+	});
+
+	if (shouldPushImage) {
+		spin("Pushing Docker image to Docker Hub...");
+
+		try {
+			await execAsync(`docker push ${imageNamespace}/${packageJSON.name}`);
+			success("Docker image pushed to Docker Hub successfully.");
+		} catch (e) {
+			error(`Failed to push Docker image to Docker Hub. \n\n${e}`);
 			exit(1);
 		}
 	}

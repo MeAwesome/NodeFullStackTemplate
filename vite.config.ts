@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { vitePlugin as remix } from "@remix-run/dev";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
+import { remixPWA } from "@remix-pwa/dev";
 
 declare module "@remix-run/node" {
 	interface Future {
@@ -22,6 +23,9 @@ export default defineConfig({
 			}
 		}),
 		tsconfigPaths(),
-		tailwindcss()
+		tailwindcss(),
+		remixPWA({
+			workerBuildDirectory: "build/remix/client"
+		})
 	]
 });
